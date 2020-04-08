@@ -63,3 +63,22 @@ plt.ylabel('Number of Student', fontsize=16)
 difficulty_map={'easy':1,'med':2,'hard':3}
 df['difficulty']=df['difficulty'].map(difficulty_map)
 print(df)
+new_df = df.copy()
+new_df = new_df.drop(['MHRDName'], axis=1)
+print(new_df)
+# see correlation between variables through a correlation heatmap
+corr = df.corr()
+plt.figure(figsize=(10,10))
+sns.heatmap(corr, annot=True, cmap="Blues")
+plt.title('Correlation Heatmap', fontsize=20)
+# difficulty level Countplot
+plt.figure(figsize=(8,6))
+sns.countplot(df.difficulty, order=["easy","med","hard"], palette='Set1')
+plt.title('Difficulty level based on grades',fontsize=20)
+plt.xlabel('Difficulty lvel', fontsize=16)
+plt.ylabel('Number of Student', fontsize=16)
+# dataset train_test_split
+from sklearn.model_selection import train_test_split
+X = new_df.drop('difficulty',axis=1)
+y = new_df.difficulty
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3)
