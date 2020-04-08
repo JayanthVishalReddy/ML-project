@@ -82,3 +82,23 @@ from sklearn.model_selection import train_test_split
 X = new_df.drop('difficulty',axis=1)
 y = new_df.difficulty
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3)
+#classification 
+#SVM
+from sklearn.svm import SVC
+svc = SVC()
+s= svc.fit(X_train, y_train)
+print("SVC Model Score" , ":" , s.score(X_train, y_train) , "," ,
+      "Cross Validation Score" ,":" , s.score(X_test, y_test))
+#ada boost classification
+from sklearn.ensemble import AdaBoostClassifier
+ada = AdaBoostClassifier(n_estimators=1)
+af = ada.fit(X_train, y_train)
+print("Ada Boost Model Score" , ":" , af.score(X_train, y_train) , "," ,
+      "Cross Validation Score" ,":" , af.score(X_test, y_test))
+
+#Stochastic Gradient Descent Classification
+from sklearn.linear_model import SGDClassifier
+sgd = SGDClassifier()
+sf = sgd.fit(X_train, y_train)
+print("Stochastic Gradient Descent Model Score" , ":" , sf.score(X_train, y_train) , "," ,
+      "Cross Validation Score" ,":" , sf.score(X_test, y_test))
