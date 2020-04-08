@@ -102,3 +102,32 @@ sgd = SGDClassifier()
 sf = sgd.fit(X_train, y_train)
 print("Stochastic Gradient Descent Model Score" , ":" , sf.score(X_train, y_train) , "," ,
       "Cross Validation Score" ,":" , sf.score(X_test, y_test))
+#Random forest classifier
+from sklearn.ensemble import RandomForestClassifier
+ne=[]
+for i in range(1,70):
+    forest = RandomForestClassifier(n_estimators=60, min_samples_leaf=i)
+    f = forest.fit(X_train, y_train)
+    fs = f.score(X_test, y_test)
+    ne.append(fs)
+ne = pd.Series(ne)
+ne.where(ne==ne.max()).dropna()
+forest = RandomForestClassifier(n_estimators=20, min_samples_leaf=2)
+f = forest.fit(X_train, y_train)
+print("Raondom Forest Model Score" , ":" , f.score(X_train, y_train) , "," ,
+      "Cross Validation Score" ,":" , f.score(X_test, y_test))
+#Decision Tree Classifier
+from sklearn.tree import DecisionTreeClassifier
+
+msl=[]
+for i in range(1,104):
+    tree = DecisionTreeClassifier(min_samples_leaf=i)
+    t= tree.fit(X_train, y_train)
+    ts=t.score(X_test, y_test)
+    msl.append(ts)
+msl = pd.Series(msl)
+msl.where(msl==msl.max()).dropna()
+tree = DecisionTreeClassifier(min_samples_leaf=54)
+t= tree.fit(X_train, y_train)
+print("Decisioin Tree Model Score" , ":" , t.score(X_train, y_train) , "," , 
+      "Cross Validation Score" ,":" , t.score(X_test, y_test))
