@@ -46,3 +46,20 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set_style('whitegrid')
 import statsmodels.api as sm
+# converting difficulty level of course to categorical variable into easy, med and hard
+df['difficulty'] = 'na'
+df.loc[(df.Grade >= str(1)) & (df.Grade <= str(4)), 'difficulty'] = 'easy' 
+df.loc[(df.Grade >= str(5))& (df.Grade <= str(9)), 'difficulty'] = 'med' 
+df.loc[(df.Grade >= str(10)) & (df.Grade <= str(14)), 'difficulty'] = 'hard'
+# difficulty level Countplot
+plt.figure(figsize=(8,6))
+sns.countplot(df.difficulty, order=["easy","med","hard"], palette='Set1')
+plt.title('Difficulty level based on grades',fontsize=20)
+plt.xlabel('Difficulty lvel', fontsize=16)
+plt.ylabel('Number of Student', fontsize=16)
+#mapping difficulty level into numerical value
+
+
+difficulty_map={'easy':1,'med':2,'hard':3}
+df['difficulty']=df['difficulty'].map(difficulty_map)
+print(df)
