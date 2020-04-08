@@ -14,3 +14,18 @@ print(df)
 grade_map={'O':1,'A+':2,'A':3,'B+':4,'B':5,'C':6,'D':7,'PASS':8,'E':9,'F':10,'FAIL':10,'R':11,'ReApp':11,'I':12,'M':13,'S':14}
 #print(grade_map)
 df['Grade']=df['Grade'].map(grade_map)
+# ScholarType: Hostelar vs. Day-Scholar
+
+plt.figure(figsize=(6,6))
+sns.countplot(df.ScholarType, palette='tab20b_r')
+plt.title('Hostelar and Day-Scholar Students Count', fontsize=20)
+plt.xlabel('Living Area', fontsize=16)
+plt.ylabel('Number Of Students', fontsize=16)
+plt.show()
+#mapping of gender and scholar type
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+df['ScholarType']=le.fit_transform(df['ScholarType'].values)
+df['Gender']=le.fit_transform(df['Gender'].values)
+print(df['ScholarType'].unique())
+print(df['Gender'].unique())
